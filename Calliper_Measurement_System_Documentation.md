@@ -20,12 +20,13 @@ The Calliper Measurement System is a web-based tool that allows users to upload 
 ## Workflow Overview
 ```mermaid
 graph TD;
-    User -->|Uploads Image| Laravel Backend;
-    Laravel Backend -->|Saves Image| Storage;
-    Laravel Backend -->|Calls Python Script| Python Engine;
-    Python Engine -->|Processes Image| Storage;
+    User -->|Uploads Image| Laravel_Backend;
+    Laravel_Backend -->|Saves Image| Storage;
+    Laravel_Backend -->|Calls Python Script| Python_Engine;
+    Python_Engine -->|Processes Image| Storage;
     Storage -->|Returns Processed Image| Frontend;
     Frontend -->|Displays Measurement| User;
+
 ```
 
 ## Key Functionalities
