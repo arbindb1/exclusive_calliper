@@ -1,6 +1,6 @@
 <?php
 namespace App\Interfaces;
-Interface ImageServiceInterface
+Interface CalliperImageServiceInterface
 {
     public function storeImage($request);
     public function getRawPath();

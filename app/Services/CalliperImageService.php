@@ -1,7 +1,7 @@
 <?php
 namespace App\Services;
-use App\Interfaces\ImageServiceInterface;
-class ImageService implements ImageServiceInterface
+use App\Interfaces\CalliperImageServiceInterface;
+class CalliperImageService implements CalliperImageServiceInterface
 {
     private $imageRawPath;
     public function storeImage($request)

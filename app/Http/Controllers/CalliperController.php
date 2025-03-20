@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Interfaces\CalliperBeadTrimServiceInterface;
 use App\Interfaces\CalliperNumberServiceInterface;
-use App\Interfaces\ImageServiceInterface;
+use App\Interfaces\CalliperImageServiceInterface;
 use Illuminate\Http\Request;
 
 
@@ -12,11 +12,11 @@ use RuntimeException;
 
 class CalliperController extends Controller
 {
-    private ImageServiceInterface $ImageService;
+    private CalliperImageServiceInterface $ImageService;
     private CalliperNumberServiceInterface $CalliperNumberService;
     private CalliperBeadTrimServiceInterface $CalliperBeadTrimService;
 
-    public function __construct(ImageServiceInterface $ImageService, CalliperNumberServiceInterface $CalliperNumberService,CalliperBeadTrimServiceInterface $CalliperBeadTrimService)
+    public function __construct(CalliperImageServiceInterface $ImageService, CalliperNumberServiceInterface $CalliperNumberService,CalliperBeadTrimServiceInterface $CalliperBeadTrimService)
     {
         $this->ImageService = $ImageService;
         $this->CalliperNumberService = $CalliperNumberService;
