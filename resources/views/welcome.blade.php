@@ -51,6 +51,23 @@
             cursor: pointer;
             font-size: 16px;
         }
+        form input[type="text"]{
+            padding:10px;
+            margin:10px;
+            width:200px;
+        }
+        form input[type="submit"]{
+            padding:10px;
+            margin:10px;
+            background-color: #28a745;
+            color: #fff;
+        }
+        form input[type="file"]{
+            padding:10px;
+            margin:10px;
+        }
+
+        
     </style>
     
     <!-- Load html2canvas -->
