@@ -1,0 +1,47 @@
+    // public function execute(string $imagePath): string
+    // {
+    //     if (!file_exists($imagePath)) {
+    //         throw new RuntimeException('Image file does not exist.');
+    //     }
+    
+    //     Log::info("Processing image: {$imagePath}");
+    
+    //     // Ensure paths use forward slashes for Python compatibility
+    //     $imagePath = str_replace('\\', '/', $imagePath);
+    //     $outputDir = storage_path("app/public/rembg/" . time() . "_" . Str::random(6));
+    
+    //     // Create output directory if it doesn't exist
+    //     if (!File::exists($outputDir)) {
+    //         File::makeDirectory($outputDir, 0755, true);
+    //     }
+    
+    //     // Define output file path
+    //     $fileName = pathinfo($imagePath, PATHINFO_FILENAME) . ".png";
+    //     $outputFilePath = "{$outputDir}/{$fileName}";
+    //     $outputFilePath = str_replace('\\', '/', $outputFilePath);
+    
+    //     // Python command with rembg.cli
+
+    //     $command = "\"C:/Users/Arbin/AppData/Local/Programs/Python/Python313/python.exe\" -m rembg.cli i \"{$imagePath}\" \"{$outputFilePath}\" 2>&1";
+
+        
+    
+    //     Log::info("Executing Command: {$command}");
+    
+    //     // Execute the command
+    //     $output = [];
+    //     $returnVar = null;
+    //     exec($command, $output, $returnVar);
+    
+    //     // Log command output
+    //     Log::info('Command Output: ' . implode("\n", $output));
+    //     Log::info('Return Code: ' . $returnVar);
+    
+    //     // Check if the output file was successfully created
+    //     if (!file_exists($outputFilePath)) {
+    //         Log::error("Failed to remove background. File not created.");
+    //         throw new RuntimeException("Failed to remove background. Error: " . implode("\n", $output));
+    //     }
+    
+    //     return str_replace(storage_path("app/public"), asset("storage"), $outputFilePath);
+    // }
