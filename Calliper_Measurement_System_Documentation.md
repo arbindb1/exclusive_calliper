@@ -1,52 +1,23 @@
 # Calliper Measurement System Documentation
 
 ## Overview
-The Calliper Measurement System is a web-based tool for accurately measuring and displaying bead dimensions using a digital calliper. The system allows users to input bead sizes, upload images, and view measurements in real-time.
+The Calliper Measurement System is a web-based tool that allows users to upload an image of a bead, measure its size using a digital caliper interface, and apply image processing techniques to enhance the visibility of the bead.
 
-## Features
-- Upload and process bead images
-- Display calliper measurement with bead placement
-- Trim whitespace around images for better visualization
-- Remove image backgrounds using `rembg`
-- Download measurement images with annotations
+## Tools & Technologies Used
 
-## Technologies Used
-- **Backend:** Laravel (PHP)
-- **Frontend:** HTML, CSS, JavaScript
-- **Image Processing:** Python (`rembg`, `ImageMagick`)
+### Frontend
+- HTML
+- CSS (Custom styles)
+- JavaScript (Basic interactivity)
+- Laravel Blade Templates
 
-## Dependencies
-### Laravel Packages:
-- `Laravel Framework` (v12.2.0)
-- `Livewire` (for interactive components)
-- `Intervention Image` (for image processing)
-- `File System` (for managing storage)
+### Backend
+- Laravel 12.2.0 (PHP Framework)
+- Python 3.13 (For Image Processing)
+- ImageMagick (For Image Manipulation)
+- Rembg (For Background Removal)
 
-### Python Packages:
-- `rembg` (Background removal)
-- `Pillow` (Image manipulation)
-- `ImageMagick` (for trimming images)
-
-## Installation & Setup
-### 1. Install Laravel Dependencies
-```sh
-composer install
-php artisan migrate
-```
-
-### 2. Install Python Dependencies
-```sh
-pip install rembg pillow
-```
-
-### 3. Set Up ImageMagick (for trimming)
-- Windows: Download from [ImageMagick website](https://imagemagick.org)
-- Linux:
-```sh
-sudo apt install imagemagick
-```
-
-## System Architecture
+## Workflow Overview
 ```mermaid
 graph TD;
     User -->|Uploads Image| Laravel Backend;
@@ -57,27 +28,68 @@ graph TD;
     Frontend -->|Displays Measurement| User;
 ```
 
-## API Routes
-| Method | Route | Description |
-|--------|-------|-------------|
-| POST | `/calliper/data` | Upload bead image and process measurement |
-| GET | `/download/image` | Download the processed image |
+## Key Functionalities
 
-## Code Structure
+### 1. Uploading Image
+- Users can upload an image of a bead.
+- The image is stored in the `/public/misc/certificate/nepa-rudraksha/beads/` directory.
+
+### 2. Processing Image
+- The backend calls a Python script to process the image.
+- Rembg is used to remove the background.
+- ImageMagick (`convert`) is used to trim the image.
+
+### 3. Displaying Measurement
+- The processed image is displayed on the frontend.
+- A digital caliper interface is used to represent the measurement.
+
+## Installation & Setup
+
+### 1. Install Dependencies
+```bash
+# Install Laravel
+composer install
+
+# Install Python dependencies
+pip install rembg
+pip install pillow
+pip install imageio
 ```
-/app
-  /Http/Controllers
-    CalliperController.php
-/public
-  /misc/certificate/nepa-rudraksha/beads
-/resources/views
-  welcome.blade.php
+
+### 2. Install ImageMagick
+- Download from [https://imagemagick.org](https://imagemagick.org)
+- Add `convert` to system path.
+
+## Code Changes
+
+### 1. Laravel Controller (CalliperController.php)
+- Handles image uploads.
+- Calls Python scripts for processing.
+
+### 2. Frontend (Blade Template)
+- Updated CSS for better UI.
+- Added functionality to capture the image of the caliper.
+
+### 3. Python Script
+- Uses `rembg` for background removal.
+- Uses `convert` (ImageMagick) for image trimming.
+
+## Diagram: Laravel-Python Integration
+```mermaid
+sequenceDiagram
+    participant User
+    participant Laravel
+    participant Python
+    participant Storage
+    User->>Laravel: Uploads Image
+    Laravel->>Storage: Saves Image
+    Laravel->>Python: Calls Rembg Script
+    Python->>Storage: Processes Image
+    Storage->>Laravel: Returns Processed Image
+    Laravel->>User: Displays Measurement
 ```
 
-## CSS Improvements
-- Used `flexbox` for layout structure
-- Improved spacing and positioning
-- Added better scaling for responsiveness
-
-## Conclusion
-This system allows accurate bead measurement using a digital calliper interface. With real-time image processing and enhanced visualization, it provides an efficient solution for Rudraksha bead measurements.
+## Future Improvements
+- Add user authentication.
+- Improve measurement accuracy.
+- Allow export of measurements as a report.
