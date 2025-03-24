@@ -43,15 +43,29 @@
 
         /* Download Button */
         #download-btn {
-            margin-top: 20px;
-            padding: 10px 15px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        form input[type="text"]{
+            margin-left:700px;
+        margin-top: 20px;
+        padding: 12px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+    }
+
+    #download-btn:hover {
+        background-color: #0056b3;
+        transform: scale(1.02);
+    }
+
+    #download-btn:active {
+        transform: scale(0.98);
+    }
+        /* form input[type="text"]{
             padding:10px;
             margin:10px;
             width:200px;
@@ -65,8 +79,87 @@
         form input[type="file"]{
             padding:10px;
             margin:10px;
-        }
+        } */
+        .form-wrapper {
+            margin-left:500px;
+        margin-top: 40px;
+        background: #ffffff;
+        padding: 25px 40px;
+        border-radius: 10px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
+    .form-wrapper h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .form-wrapper input[type="text"] {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 16px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+        transition: border 0.3s;
+    }
+
+    .form-wrapper input[type="text"]:focus {
+        outline: none;
+        border-color: #007bff;
+    }
+
+    .custom-file-upload {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 16px;
+        border: 2px dashed #aaa;
+        border-radius: 6px;
+        text-align: center;
+        color: #555;
+        background-color: #f9f9f9;
+        cursor: pointer;
+        transition: border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+    .custom-file-upload:hover {
+        background-color: #f0f0f0;
+        border-color: #007bff;
+    }
+
+    .form-wrapper input[type="file"] {
+        display: none;
+    }
+
+    .form-wrapper input[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        border: none;
+        color: white;
+        font-weight: 600;
+        font-size: 15px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .form-wrapper input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    #file-name {
+        font-size: 13px;
+        color: #333;
+        margin-bottom: 10px;
+        text-align: center;
+        display: none;
+    }
         
     </style>
     
@@ -76,13 +169,19 @@
 </head>
 
 <body class="bg-[#FDFDFC] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
-
+<div class="form-wrapper">
+    <h2>Upload Bead Image</h2>
     <form action="{{ route('calliper.data')}}" method="post" enctype="multipart/form-data">
         @csrf
-        <input type="text" placeholder="Size" name="size">
-        <input type="file" name="bead_image">
+        <input type="text" name="size" placeholder="Enter Bead Size" required>
+
+        <label class="custom-file-upload" for="bead_image">📁 Click to upload bead image</label>
+        <input type="file" id="bead_image" name="bead_image" required onchange="showFileName(this)">
+        <div id="file-name"></div>
+
         <input type="submit" value="Submit" name="submit">
     </form>
+</div>
 
     <!-- Calliper Container (Image to Capture) -->
     <div id="capture-area" class="calliper-container">
@@ -137,6 +236,15 @@
             link.click();
         });
     });
+    function showFileName(input) {
+        const fileNameDiv = document.getElementById('file-name');
+        if (input.files.length > 0) {
+            fileNameDiv.style.display = 'block';
+            fileNameDiv.innerText = `Selected: ${input.files[0].name}`;
+        } else {
+            fileNameDiv.style.display = 'none';
+        }
+    }
 </script>
 
 
