@@ -5,7 +5,7 @@ use App\Http\Controllers\CalliperController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 Route::post('/data',[CalliperController::class,'calliperData'])->name('calliper.data');
 Route::middleware([
     'auth:sanctum',

@@ -200,7 +200,9 @@
     display: flex;
     align-items: center;
 }
-
+.logo-title a{
+    text-decoration: none;
+}
 .logo {
     border:solid 1px #e6c569;
     width: 50px;
@@ -233,8 +235,10 @@
 <body class="bg-[#FDFDFC] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
 <nav class="navbar">
     <div class="logo-title">
+
         <img src="{{ asset('logo/exclusive-calliper-logo.png') }}" alt="Exclusive Calliper Logo" class="logo">
-        <h1 class="navbar-title">Exclusive Calliper</h1>
+        <a href="{{ route('welcome') }}"> <h1 class="navbar-title">Exclusive Calliper</h1>
+        </a>
     </div>
 </nav>
 
