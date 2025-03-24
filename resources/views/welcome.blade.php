@@ -7,12 +7,16 @@
     <title>Laravel</title>
 
     <style>
+        body{
+            padding:0;
+            margin:0;
+        }
         .calliper-container {
             display: flex;
             background: none !important;
             padding-left: 250px;
             margin-top: 100px;
-            margin-left: 200px;
+            margin-left: 100px;
             background-color: white; /* To ensure transparent background is handled properly */
         }
 
@@ -44,9 +48,11 @@
         /* Download Button */
         #download-btn {
             margin-left:700px;
-        margin-top: 20px;
+        margin-top: 100px;
         padding: 12px 20px;
-        background-color: #007bff;
+        /* background-color: #007bff; */
+        background: linear-gradient(90deg, #dbad62 0%, #e6c569 0.01%, #ca8401 100%);
+
         color: white;
         border: none;
         border-radius: 6px;
@@ -139,7 +145,9 @@
     .form-wrapper input[type="submit"] {
         width: 100%;
         padding: 12px;
-        background-color: #007bff;
+        /* background-color: #007bff; */
+        background: linear-gradient(90deg, #dbad62 0%, #e6c569 0.01%, #ca8401 100%);
+
         border: none;
         color: white;
         font-weight: 600;
@@ -160,7 +168,61 @@
         text-align: center;
         display: none;
     }
-        
+    .navbar {
+    display: flex;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #1a1a1a;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    color: white;
+}
+
+.navbar-logo-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    background-color: #1a202c; /* Dark theme */
+    padding: 10px 20px;
+    color: white;
+}
+
+.logo-title {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    border:solid 1px #e6c569;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Makes it circular */
+    margin-right: 15px;
+    object-fit: cover;
+    border: 2px solid white;
+}
+
+.navbar h1 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.navbar-title{
+    background: linear-gradient(90deg, #dbad62 0%, #e6c569 0.01%, #ca8401 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
     </style>
     
     <!-- Load html2canvas -->
@@ -169,6 +231,14 @@
 </head>
 
 <body class="bg-[#FDFDFC] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
+<nav class="navbar">
+    <div class="logo-title">
+        <img src="{{ asset('logo/exclusive-calliper-logo.png') }}" alt="Exclusive Calliper Logo" class="logo">
+        <h1 class="navbar-title">Exclusive Calliper</h1>
+    </div>
+</nav>
+
+
 <div class="form-wrapper">
     <h2>Upload Bead Image</h2>
     <form action="{{ route('calliper.data')}}" method="post" enctype="multipart/form-data">
@@ -184,6 +254,7 @@
 </div>
 
     <!-- Calliper Container (Image to Capture) -->
+    @if(isset($beadMovement) && isset($beadScale)) 
     <div id="capture-area" class="calliper-container">
         <img class="calliper_head" src="{{ url('misc/certificate/nepa-rudraksha/calliper_head_irl.png') }}" alt="calliper head">
 
@@ -203,6 +274,7 @@
             <img class="calliper_tail" src="{{ url('misc/certificate/nepa-rudraksha/jam_irl.png') }}" alt="calliper head">
         </div>
     </div>
+    @endif
 
     <!-- Download Button -->
     <button id="download-btn">Download Image</button>
