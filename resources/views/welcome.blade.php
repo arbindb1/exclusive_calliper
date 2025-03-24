@@ -278,11 +278,11 @@
             <img class="calliper_tail" src="{{ url('misc/certificate/nepa-rudraksha/jam_irl.png') }}" alt="calliper head">
         </div>
     </div>
-    @endif
+
 
     <!-- Download Button -->
     <button id="download-btn">Download Image</button>
-
+    @endif
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
     document.getElementById('download-btn').addEventListener('click', function () {
