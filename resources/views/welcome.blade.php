@@ -47,7 +47,7 @@
 
         /* Download Button */
         #download-btn {
-            margin-left:700px;
+            margin-left:671px;
         margin-top: 100px;
         padding: 12px 20px;
         /* background-color: #007bff; */
