@@ -44,6 +44,51 @@ graph TD;
 - The processed image is displayed on the frontend.
 - A digital caliper interface is used to represent the measurement.
 
+## Steps to Install ImageMagick
+
+Follow these steps to install ImageMagick on your system:
+
+### 1. Download ImageMagick
+- Visit the official ImageMagick website: [https://imagemagick.org](https://imagemagick.org).
+- Download the appropriate version for your operating system (Windows, macOS, or Linux).
+
+### 2. Install ImageMagick
+- Run the installer and follow the on-screen instructions.
+- During installation, ensure the following options are selected:
+  - Add application directory to your system path.
+  - Install legacy utilities (e.g., `convert`).
+
+### 3. Download DLL Files
+- Visit [https://pecl.php.net/package/imagick/3.8.0RC2/windows](https://pecl.php.net/package/imagick/3.8.0RC2/windows).
+- Download the DLL zip file for your PHP version.
+
+### 4. Copy DLL Files
+- Extract the downloaded zip file.
+- Copy all `CORE*.dll` and `IM_MOD*.dll` files to your PHP installation directory (e.g., `C:\php`).
+- Copy the `php_imagick.dll` file to the `ext` directory inside your PHP installation (e.g., `C:\php\ext`).
+
+### 5. Enable the PHP Extension
+- Open your `php.ini` file.
+- Add the following line to enable the `imagick` extension:
+    ```ini
+    extension=php_imagick.dll
+    ```
+
+### 6. Verify Installation
+- Restart your web server (e.g., Apache or Nginx).
+- Run the following command to verify that the `imagick` extension is enabled:
+    ```bash
+    php -m | findstr imagick
+    ```
+- You should see `imagick` listed in the output.
+
+### 7. Test ImageMagick
+- Test ImageMagick by running a simple command:
+    ```bash
+    convert input.jpg -resize 50% output.jpg
+    ```
+- Replace `input.jpg` with the path to an image file on your system. This command resizes the image to 50% of its original size.
+
 ## Installation & Setup
 
 ### 1. Install Dependencies
@@ -58,8 +103,7 @@ pip install imageio
 ```
 
 ### 2. Install ImageMagick
-- Download from [https://imagemagick.org](https://imagemagick.org)
-- Add `convert` to system path.
+- Follow the steps outlined in the [Steps to Install ImageMagick](#steps-to-install-imagemagick) section.
 
 ## Code Changes
 
