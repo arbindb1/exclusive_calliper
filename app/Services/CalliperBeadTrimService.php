@@ -44,7 +44,7 @@ class CalliperBeadTrimService implements CalliperBeadTrimServiceInterface{
     //     $outputFilePath = str_replace('\\', '/', $outputFilePath);
     //     $imagePath = str_replace('\\', '/', $imagePath);
 
-      $command = "python -m rembg i \"{$imagePath}\" \"{$outputFilePath}\" 2>&1";
+      $command = "python3 -m rembg i \"{$imagePath}\" \"{$outputFilePath}\" 2>&1";
 
         Log::info('Executing command trimwhitespace: ' . $command);
 
