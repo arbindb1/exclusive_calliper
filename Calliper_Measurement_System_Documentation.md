@@ -3,6 +3,8 @@
 ## Overview
 The Calliper Measurement System is a web-based tool that allows users to upload an image of a bead, measure its size using a digital caliper interface, and apply image processing techniques to enhance the visibility of the bead.
 
+---
+
 ## Tools & Technologies Used
 
 ### Frontend
@@ -17,17 +19,7 @@ The Calliper Measurement System is a web-based tool that allows users to upload 
 - ImageMagick (For Image Manipulation)
 - Rembg (For Background Removal)
 
-## Workflow Overview
-```mermaid
-graph TD;
-    User -->|Uploads Image| Laravel_Backend;
-    Laravel_Backend -->|Saves Image| Storage;
-    Laravel_Backend -->|Calls Python Script| Python_Engine;
-    Python_Engine -->|Processes Image| Storage;
-    Storage -->|Returns Processed Image| Frontend;
-    Frontend -->|Displays Measurement| User;
-
-```
+---
 
 ## Key Functionalities
 
@@ -44,30 +36,129 @@ graph TD;
 - The processed image is displayed on the frontend.
 - A digital caliper interface is used to represent the measurement.
 
-## Installation & Setup
+---
 
-### 1. Install Dependencies
+## Local Installation & Setup
+
+### 1. Install Laravel
 ```bash
-# Install Laravel
 composer install
+```
+ 
+## 2.CalliperBackgroundRemoveService Command For windows local machine
+ ```php
+  $command = "magik convert \"{$imagePath}\" -trim \"{$outputFilePath}\" 2>&1";
+  ```
 
-# Install Python dependencies
+### 3. Install Python Dependencies
+Install the required Python dependencies for running `rembg`:
+```bash
 pip3 install click filetype rembg onnxruntime watchdog aiohttp gradio asyncer
 ```
 
-### 2. Install ImageMagick
-- Download from [https://imagemagick.org](https://imagemagick.org)
-- Add `convert` to system path.
+### 4. Install ImageMagick
+- Download from [https://imagemagick.org](https://imagemagick.org).
+- Add `convert` to the system path.
 
-### 3. Full Path Requirement for `rembg`
+### 5. Full Path Requirement for `rembg`
 - When using `rembg` in Laravel, ensure that the **full path** to the `rembg` executable is specified in the code.
 - Example:
     ```php
     $rembgPath = '/full/path/to/rembg.py'; 
-      $rembgPath = str_replace('\\', '/', $rembgPath);
+    $rembgPath = str_replace('\\', '/', $rembgPath);
     $command = "\"{$rembgPath}\" i \"{$imagePath}\" \"{$outputFilePath}\"";
     ```
 - Replace `/full/path/to/rembg.py` with the actual path where `rembg.py` is located on your system.
+- To find the rembg.exe file path on local machine
+```bash
+where rembg
+```
+
+---
+
+## Server Installation and Setup
+
+## 1.Configure Predefined Commands
+- ## Install Command
+```bash
+apt-get update && apt-get install -y imagemagick && apt-get update && apt-get install -y imagemagick python3 python3-pip && pip3 install rembg onnxruntime && pip3 install click filetype rembg onnxruntime watchdog aiohttp gradio asyncer
+```
+
+- ## Build Command
+```bash
+composer install --no-interaction --prefer-dist --optimize-autoloader && php artisan migrate --force && php artisan config:cache && chmod -R 775 public/misc && chown -R www-data:www-data public/misc
+```
+
+- ## Start Command
+```bash
+php artisan serve --host=0.0.0.0 --port=$PORT
+```
+
+## 2.CalliperBackgroundRemoveService Command For Server/linux
+ ```php
+  $command = "convert \"{$imagePath}\" -trim \"{$outputFilePath}\" 2>&1";
+  ```
+## 3.CAlliperBeadTrimService Command For Server/linux
+- Note that in local machine the parth for rembg.exe will be different from while executing in server so while deploying the code change rembg path.
+- Command to check rembg path in server:
+```bash
+which rembg
+```
+
+
+## Dependencies and Their Purpose
+
+### 1. Laravel
+- Used as the backend framework for handling requests, routing, and business logic.
+
+### 2. Python Dependencies
+- **rembg**: The main package for background removal.
+- **click**: For creating command-line interfaces.
+- **filetype**: To determine the type of files being processed.
+- **onnxruntime**: Provides runtime support for ONNX models used in image processing.
+- **watchdog**: Monitors file system changes for real-time updates.
+- **aiohttp**: An asynchronous HTTP client/server framework.
+- **gradio**: For creating user interfaces for machine learning models.
+- **asyncer**: Simplifies asynchronous programming in Python.
+
+### 3. ImageMagick
+- Used for image manipulation, such as trimming and resizing.
+
+---
+
+## Workflow Overview
+
+```mermaid
+graph TD;
+    User -->|Uploads Image| Laravel_Backend;
+    Laravel_Backend -->|Saves Image| Storage;
+    Laravel_Backend -->|Calls Python Script| Python_Engine;
+    Python_Engine -->|Processes Image| Storage;
+    Storage -->|Returns Processed Image| Frontend;
+    Frontend -->|Displays Measurement| User;
+```
+
+---
+
+## Package Dependencies Diagram
+
+The following diagram illustrates the main packages used in the system and their dependencies:
+
+```mermaid
+graph TD;
+    Rembg["rembg"] -->|Depends On| Click["click"];
+    Rembg -->|Depends On| Filetype["filetype"];
+    Rembg -->|Depends On| Onnxruntime["onnxruntime"];
+    Rembg -->|Depends On| Watchdog["watchdog"];
+    Rembg -->|Depends On| Aiohttp["aiohttp"];
+    Rembg -->|Depends On| Gradio["gradio"];
+    Rembg -->|Depends On| Asyncer["asyncer"];
+    Gradio -->|Depends On| Aiohttp;
+    Gradio -->|Depends On| Asyncer;
+    Aiohttp -->|Depends On| Watchdog;
+```
+
+---
 
 ## Code Changes
 
@@ -83,20 +174,7 @@ pip3 install click filetype rembg onnxruntime watchdog aiohttp gradio asyncer
 - Uses `rembg` for background removal.
 - Uses `convert` (ImageMagick) for image trimming.
 
-## Diagram: Laravel-Python Integration
-```mermaid
-sequenceDiagram
-    participant User
-    participant Laravel
-    participant Python
-    participant Storage
-    User->>Laravel: Uploads Image
-    Laravel->>Storage: Saves Image
-    Laravel->>Python: Calls Rembg Script
-    Python->>Storage: Processes Image
-    Storage->>Laravel: Returns Processed Image
-    Laravel->>User: Displays Measurement
-```
+---
 
 ## Future Improvements
 - Add user authentication.
