@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Interfaces\CalliperBackgroundRemoveServiceInterface;
 use App\Interfaces\CalliperBeadTrimServiceInterface;
 use App\Interfaces\CalliperNumberServiceInterface;
 use App\Interfaces\CalliperImageServiceInterface;
@@ -15,12 +16,14 @@ class CalliperController extends Controller
     private CalliperImageServiceInterface $ImageService;
     private CalliperNumberServiceInterface $CalliperNumberService;
     private CalliperBeadTrimServiceInterface $CalliperBeadTrimService;
+    private CalliperBackgroundRemoveServiceInterface $CalliperBackgroundRemoveService;
 
-    public function __construct(CalliperImageServiceInterface $ImageService, CalliperNumberServiceInterface $CalliperNumberService,CalliperBeadTrimServiceInterface $CalliperBeadTrimService)
+    public function __construct(CalliperImageServiceInterface $ImageService, CalliperNumberServiceInterface $CalliperNumberService,CalliperBeadTrimServiceInterface $CalliperBeadTrimService,CalliperBackgroundRemoveServiceInterface $CalliperBackgroundRemoveService) 
     {
         $this->ImageService = $ImageService;
         $this->CalliperNumberService = $CalliperNumberService;
         $this->CalliperBeadTrimService = $CalliperBeadTrimService;
+        $this->CalliperBackgroundRemoveService = $CalliperBackgroundRemoveService;
     }
     public function calliperData(Request $request)
     {
@@ -32,7 +35,8 @@ class CalliperController extends Controller
         $imagePath = '';
         $imageRawPath = '';
         $this->ImageService->storeImage($request);
-        $outputFilePath = $this->CalliperBeadTrimService->processBeadTrim($this->ImageService->getRawPath());
+        $removedPath = $this->CalliperBackgroundRemoveService->removeBackground($this->ImageService->getRawPath());
+        $outputFilePath = $this->CalliperBeadTrimService->processBeadTrim($removedPath);
 
         //Processing Calliper Number and retriving required parameters
         $this->CalliperNumberService->processCalliperNumber($request);

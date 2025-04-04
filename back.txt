@@ -45,3 +45,23 @@
     
     //     return str_replace(storage_path("app/public"), asset("storage"), $outputFilePath);
     // }
+
+
+
+
+
+            $imagePath = str_replace('\\', '/', $imagePath);
+            $fileName = pathinfo($imagePath, PATHINFO_FILENAME);
+    
+            $outputPath ??= pathinfo($imagePath, PATHINFO_DIRNAME);
+            $outputPath = str_replace('\\', '/', $outputPath);
+                   if (!File::exists($outputPath)) {
+                File::makeDirectory($outputPath, 0755, true);
+         }
+    
+            $outputFilePath = $outputPath . '/' . $fileName . '-trimmed.png';
+            $imagePathAbsolute = url('misc/certificate/nepa-rudraksha/beads/' . $fileName.'-trimmed.png');
+            $outputFilePath = str_replace('\\', '/', $outputFilePath);
+            $imagePath = str_replace('\\', '/', $imagePath);
+
+                //     $command = "\"{$imagePath}\" -m rembg.cli i \"{$imagePath}\" \"{$outputFilePath}\" 2>&1";

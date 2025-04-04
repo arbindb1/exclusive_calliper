@@ -32,13 +32,16 @@
         }
 
         .bead_image {
-            position: absolute;
-            top: 480px;
-            left: -220px;
-            width: 150px;
-            height: 150px;
-            object-fit: content;
-        }
+    position: absolute;
+    top: 480px;
+    left: -220px;
+    max-width: 150px;
+    max-height: 150px;
+    height: auto;
+    width: auto;
+    object-fit: contain;
+}
+
 
         .moving-parts {
             position: relative;

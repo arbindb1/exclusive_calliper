@@ -97,13 +97,21 @@ Follow these steps to install ImageMagick on your system:
 composer install
 
 # Install Python dependencies
-pip install rembg
-pip install pillow
-pip install imageio
+pip3 install click filetype rembg onnxruntime watchdog aiohttp gradio asyncer
 ```
 
 ### 2. Install ImageMagick
 - Follow the steps outlined in the [Steps to Install ImageMagick](#steps-to-install-imagemagick) section.
+
+### 3. Full Path Requirement for `rembg`
+- When using `rembg` in Laravel, ensure that the **full path** to the `rembg` executable is specified in the code.
+- Example:
+    ```php
+    $rembgPath = '/full/path/to/rembg.py'; 
+      $rembgPath = str_replace('\\', '/', $rembgPath);
+    $command = "\"{$rembgPath}\" i \"{$imagePath}\" \"{$outputFilePath}\"";
+    ```
+- Replace `/full/path/to/rembg.py` with the actual path where `rembg.py` is located on your system.
 
 ## Code Changes
 
