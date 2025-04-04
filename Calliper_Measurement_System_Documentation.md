@@ -58,7 +58,7 @@ pip install click filetype rembg onnxruntime watchdog aiohttp gradio asyncer
 
 ### 4. Install ImageMagick
 - Download and install from [https://imagemagick.org](https://imagemagick.org).
-- Download dll files from [https://pecl.php.net/package/imagick/3.8.0RC2/windows](https://pecl.php.net/package/imagick/3.8.0RC2/windows).
+- Download dll files from [https://pecl.php.net/package/imagick/3.8.0RC2/windows](https://pecl.php.net/package/imagick/3.8.0RC2/windows) (PHP version specific).
 - Copy the dll files below to your php directory  
     - CORE_RL_*.dll (core files)
     - IM_MOD_RL_*.dll (module files)
