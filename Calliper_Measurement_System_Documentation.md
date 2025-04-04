@@ -98,7 +98,7 @@ php artisan serve --host=0.0.0.0 --port=$PORT
  ```php
   $command = "convert \"{$imagePath}\" -trim \"{$outputFilePath}\" 2>&1";
   ```
-## 3.CAlliperBeadTrimService Command For Server/linux
+## 3.rembg Command For Server/linux
 - Note that in local machine the parth for rembg.exe will be different from while executing in server so while deploying the code change rembg path.
 - Command to check rembg path in server:
 ```bash
