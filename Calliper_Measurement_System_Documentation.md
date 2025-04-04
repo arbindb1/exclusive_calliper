@@ -52,9 +52,7 @@ graph TD;
 composer install
 
 # Install Python dependencies
-pip install rembg
-pip install pillow
-pip install imageio
+pip3 install click filetype rembg onnxruntime watchdog aiohttp gradio asyncer
 ```
 
 ### 2. Install ImageMagick
