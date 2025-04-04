@@ -59,6 +59,16 @@ pip3 install click filetype rembg onnxruntime watchdog aiohttp gradio asyncer
 - Download from [https://imagemagick.org](https://imagemagick.org)
 - Add `convert` to system path.
 
+### 3. Full Path Requirement for `rembg`
+- When using `rembg` in Laravel, ensure that the **full path** to the `rembg` executable is specified in the code.
+- Example:
+    ```php
+    $rembgPath = '/full/path/to/rembg.py'; 
+      $rembgPath = str_replace('\\', '/', $rembgPath);
+    $command = "\"{$rembgPath}\" i \"{$imagePath}\" \"{$outputFilePath}\"";
+    ```
+- Replace `/full/path/to/rembg.py` with the actual path where `rembg.py` is located on your system.
+
 ## Code Changes
 
 ### 1. Laravel Controller (CalliperController.php)
