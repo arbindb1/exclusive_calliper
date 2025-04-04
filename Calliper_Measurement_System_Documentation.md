@@ -45,7 +45,7 @@ The Calliper Measurement System is a web-based tool that allows users to upload 
 composer install
 ```
  
-## 2.CalliperBackgroundRemoveService Command For windows local machine
+## 2.Imagick Command For windows local machine
  ```php
   $command = "magik convert \"{$imagePath}\" -trim \"{$outputFilePath}\" 2>&1";
   ```
