@@ -53,7 +53,7 @@ composer install
 ### 3. Install Python Dependencies
 Install the required Python dependencies for running `rembg`:
 ```bash
-pip3 install click filetype rembg onnxruntime watchdog aiohttp gradio asyncer
+pip install click filetype rembg onnxruntime watchdog aiohttp gradio asyncer
 ```
 
 ### 4. Install ImageMagick
