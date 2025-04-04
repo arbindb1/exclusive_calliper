@@ -25,7 +25,7 @@ class CalliperBackgroundRemoveService implements CalliperBackgroundRemoveService
             $outputFilePath = str_replace('\\', '/', $outputFilePath);
             $imagePath = str_replace('\\', '/', $imagePath);
 
-      $rembgPath = '/usr/local/bin/rembg'; 
+      $rembgPath = 'C:\Users\Arbin\AppData\Local\Programs\Python\Python313\Scripts\rembg.exe'; 
       $rembgPath = str_replace('\\', '/', $rembgPath);// Update as per your output
       $command = "\"{$rembgPath}\" i \"{$imagePath}\" \"{$outputFilePath}\"";
         Log::info('Executing command trimwhitespace: ' . $command);

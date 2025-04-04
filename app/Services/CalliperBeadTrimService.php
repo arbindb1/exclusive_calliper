@@ -22,7 +22,7 @@ class CalliperBeadTrimService implements CalliperBeadTrimServiceInterface{
             $imagePathAbsolute = url('misc/certificate/nepa-rudraksha/beads/' . $fileName.'-trimmed.png');
             $outputFilePath = str_replace('\\', '/', $outputFilePath);
             $imagePath = str_replace('\\', '/', $imagePath);
-            $command = "convert \"{$imagePath}\" -trim \"{$outputFilePath}\" 2>&1";
+            $command = "magick convert \"{$imagePath}\" -trim \"{$outputFilePath}\" 2>&1";
     
             Log::info('Executing command trimwhitespace: ' . $command);
     
