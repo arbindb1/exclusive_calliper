@@ -57,8 +57,18 @@ pip install click filetype rembg onnxruntime watchdog aiohttp gradio asyncer
 ```
 
 ### 4. Install ImageMagick
-- Download from [https://imagemagick.org](https://imagemagick.org).
-- Add `convert` to the system path.
+- Download and install from [https://imagemagick.org](https://imagemagick.org).
+- Download dll files from [https://pecl.php.net/package/imagick/3.8.0RC2/windows](https://pecl.php.net/package/imagick/3.8.0RC2/windows).
+- Copy the dll files below to your php directory  
+    - CORE_RL_*.dll (core files)
+    - IM_MOD_RL_*.dll (module files)
+
+- Copy the dll file below to your php/ext directory
+    - php_imagick.dll (extension file)
+
+- In your php/php.ini file copy the line below
+    - extension=php_imagick.dll
+
 
 ### 5. Full Path Requirement for `rembg`
 - When using `rembg` in Laravel, ensure that the **full path** to the `rembg` executable is specified in the code.
